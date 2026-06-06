@@ -106,6 +106,10 @@ pub struct MapGenerator {
     #[export]
     altitude_offset: f32,
 
+    #[var]
+    #[export]
+    water_node_path: NodePath,
+
     base: Base<Node>,
 }
 
@@ -131,6 +135,7 @@ impl INode for MapGenerator {
             map_km_wide: 0.0,
             recommended_spacing: 1.0,
             altitude_offset: 0.0,
+            water_node_path: NodePath::from(""),
             base 
         }
     }
@@ -141,6 +146,13 @@ impl INode for MapGenerator {
             let meters_per_pixel = self.calculate_meters_per_pixel();
             self.map_km_wide = (self.tiles_wide as f32 * 256.0 * meters_per_pixel as f32) / 1000.0;
             self.recommended_spacing = meters_per_pixel as f32;
+            
+            // Sync water node
+            if !self.water_node_path.is_empty() {
+                if let Some(mut water_node) = self.base().get_node_or_null(&self.water_node_path) {
+                    water_node.set("water_level", &self.altitude_offset.to_variant());
+                }
+            }
         }
     }
 }
