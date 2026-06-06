@@ -18,6 +18,7 @@ target/
 Thumbs.db
 *.swp
 *.log
+gemini.md
 
 # GDExtension Binaries (Keep the .gdextension file, ignore the .dll/.so)
 godot_project/bin/*.dll
