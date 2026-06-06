@@ -1,0 +1,27 @@
+# Godot 4.x
+.godot/
+*.translation
+*.import
+export_presets.cfg
+.mono/
+data.base
+mono_project.sln
+mono_project.csproj
+.vscode/
+
+# Rust
+target/
+**/*.rs.bk
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+
+# GDExtension Binaries (Keep the .gdextension file, ignore the .dll/.so)
+godot_project/bin/*.dll
+godot_project/bin/*.so
+godot_project/bin/*.dylib
+godot_project/bin/*.wasm
+!godot_project/bin/*.gdextension

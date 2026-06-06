@@ -1,0 +1,17 @@
+[gd_resource type="Environment" format=3 uid="uid://dlo4d1tui6x2k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_568mj"]
+
+[sub_resource type="Sky" id="Sky_cwklf"]
+sky_material = SubResource("ShaderMaterial_568mj")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_cwklf")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.85
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 6.0
+ssil_enabled = true
