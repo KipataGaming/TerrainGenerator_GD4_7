@@ -23,4 +23,7 @@ func _process(delta):
 
 func set_water_level(value: float):
     water_level = value
-    position.y = water_level
+    if is_inside_tree():
+        position.y = water_level
+    else:
+        call_deferred("set_water_level", value)
