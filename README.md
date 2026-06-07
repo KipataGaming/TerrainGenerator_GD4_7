@@ -4,34 +4,36 @@ A high-performance procedural terrain generation tool for Godot 4.x, built with 
 
 ## Features
 
-- **Rust-Powered Processing:** Fast conversion of real-world DEM (Digital Elevation Model) PNGs into 3D terrain data.
-- **Terrain3D Integration:** Uses direct C++ memory injection via `import_images` for live updates in the Godot editor.
-- **Slope-Based Painting:** Automatically calculates terrain slopes to apply textures (e.g., Grass vs. Rock) during generation.
-- **EXR Export:** Automatically saves processed heightmaps to OpenEXR format for further refinement.
+- **Rust-Powered Processing:** Fast conversion of real-world DEM data into 3D terrain.
+- **Advanced Post-Processing:**
+    - **Hydraulic Erosion:** Simulates natural water flow to carve realistic valleys and ridges.
+    - **Smoothing:** Multi-pass blur to remove digital artifacts.
+    - **Island Mode:** Tapers terrain edges into the sea for clean, island-style generation.
+- **Depth-Aware Water:** Includes an Ocean Controller and shader for depth-blending, foam generation, and altitude synchronization.
+- **Spatial Accuracy:** Real-world scale calculation (km-wide) and precise centering of locations to the Godot world origin.
+- **Terrain3D Integration:** Direct memory injection for live editor-based updates.
 
 ## Technical Context
 
-- **Engine:** Godot 4.7 **beta 4** (Note: Beta 5 has just released; this project is currently verified for Beta 4).
+- **Engine:** Godot 4.7 **beta 4**.
 - **Language:** Rust (Stable).
 - **Plugin Dependencies:** [Terrain3D](https://github.com/TokisanGames/Terrain3D).
 
 ## Usage
 
-1. **Setup:** Ensure you have the `Terrain3D` plugin enabled in your Godot project.
-2. **Node Setup:** Add a `MapGenerator` node (the Rust class) as a sibling to a `Terrain3D` node in your scene.
+1. **Setup:** Ensure `Terrain3D` is enabled. Add a `MapGenerator` node as a sibling to `Terrain3D`.
+2. **Search/Download:** Enter a query in `Search Query` and toggle `Run Search` to locate a position, then use `Run Download` to fetch real-world terrain.
 3. **Configuration:**
-   - `png_path`: The path to your grayscale heightmap (e.g., `res://heightmap.png`).
-   - `max_height`: The maximum 3D height scale for pure white pixels.
-4. **Generate:** Toggle the `Generate Now` checkbox in the inspector to trigger the generation process.
+   - **Scale:** Copy the `Recommended Spacing` value into the `Terrain3D` node's `Vertex Spacing`.
+   - **Post-Processing:** Use the erosion and smoothing sliders to refine the look.
+   - **Ocean:** Add an Ocean Mesh with `ocean.gdshader` and link it to the `Water Node Path` for automatic altitude sync.
 
 ## Building from Source
 
-To compile the Rust GDExtension:
-
-1. Navigate to the `rust_builder` directory.
+1. Navigate to `rust_builder`.
 2. Run `cargo build`.
-3. The resulting binary will be placed in `godot_project/bin/`.
+3. The binary in `godot_project/bin/` will update.
 
 ## License
 
-MIT (See LICENSE file for details).
+MIT.
