@@ -1,15 +1,15 @@
 shader_type spatial;
 
-uniform vec4 shallow_color : source_color = vec4(0.2, 0.5, 0.6, 0.8);
-uniform vec4 deep_color : source_color = vec4(0.05, 0.1, 0.2, 1.0);
+uniform vec4 shallow_color : source_color = vec4(0.0, 0.2, 0.6, 0.5);
+uniform vec4 deep_color : source_color = vec4(0.0, 0.1, 0.31, 1.0);
 uniform float beer_law_factor = 0.05;
 uniform float foam_threshold = 0.5;
-uniform vec4 foam_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 foam_color : source_color = vec4(1.0, 0.9, 0.9, 0.7);
 
 // Wave uniforms
-uniform float wave_speed = 2.0;
-uniform float wave_amplitude = 0.5;
-uniform float wave_frequency = 0.2;
+uniform float wave_speed = 1;
+uniform float wave_amplitude = .1;
+uniform float wave_frequency = 25;
 
 uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 
@@ -35,5 +35,5 @@ void fragment() {
     
     ALBEDO = mix(water_color.rgb, foam_color.rgb, foam);
     ALPHA = water_color.a;
-    ROUGHNESS = 0.1;
+    ROUGHNESS = 0.01;
 }
