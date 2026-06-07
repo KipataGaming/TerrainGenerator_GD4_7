@@ -6,7 +6,19 @@ uniform float beer_law_factor = 0.05;
 uniform float foam_threshold = 0.5;
 uniform vec4 foam_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 
+// Wave uniforms
+uniform float wave_speed = 2.0;
+uniform float wave_amplitude = 0.5;
+uniform float wave_frequency = 0.2;
+
 uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
+
+void vertex() {
+    // Generate waves using sine functions based on world position and time
+    float time = TIME * wave_speed;
+    float wave = sin(VERTEX.x * wave_frequency + time) * cos(VERTEX.z * wave_frequency + time) * wave_amplitude;
+    VERTEX.y += wave;
+}
 
 void fragment() {
     float depth = texture(depth_texture, SCREEN_UV).r;
